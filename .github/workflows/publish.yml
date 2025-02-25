@@ -1,0 +1,18 @@
+name: Publish Extensions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    uses: ./.github/workflows/_publish.yml
+    strategy:
+      matrix:
+        extension:
+          - sakura-checker
+    with:
+      extension: ${{ matrix.extension }}
+    secrets:
+      raycast-organization-token: ${{ secrets.RAYCAST_ORGANIZATION_TOKEN }}

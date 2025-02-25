@@ -1,0 +1,27 @@
+name: Publish
+run-name: Publish (${{ inputs.extension }})
+
+on:
+  workflow_call:
+    inputs:
+      extension:
+        required: true
+        type: string
+    secrets:
+      raycast-organization-token:
+        required: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: extensions/${{ inputs.extension }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
+      # TODO: cache npm
+      - run: npm ci
+      - run: npm run publish
+        env:
+          RAY_TOKEN: ${{ secrets.raycast-organization-token }}
