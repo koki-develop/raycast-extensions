@@ -43,7 +43,9 @@ const extractAsin = (url: string): string | null => {
 export default async function main() {
   const tabs = await BrowserExtension.getTabs();
   const activeTabs = tabs.filter((tab) => tab.active);
-  const asins = activeTabs.filter((tab) => isAmazonUrl(tab.url)).map((tab) => extractAsin(tab.url));
+  const asins = activeTabs
+    .filter((tab) => isAmazonUrl(tab.url))
+    .map((tab) => extractAsin(tab.url));
   if (asins.length === 0) {
     await showHUD("No Amazon product tabs found");
     return;
