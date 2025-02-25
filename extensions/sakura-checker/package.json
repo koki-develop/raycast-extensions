@@ -5,6 +5,7 @@
   "description": "Extension for Sakura Checker",
   "icon": "extension-icon.png",
   "author": "koki-develop",
+  "owner": "koki-organization",
   "license": "MIT",
   "commands": [
     {
